@@ -1,0 +1,40 @@
+CREATE TABLE users(
+    id BIGSERIAL NOT NULL PRIMARY KEY,
+    first_name TEXT NOT NULL DEFAULT '',
+    last_name TEXT NOT NULL DEFAULT '',
+    birthday DATE,
+    email TEXT NOT NULL DEFAULT '',
+    password TEXT NOT NULL DEFAULT '',
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(),
+    updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now()
+);
+
+CREATE UNIQUE INDEX users_email_key ON users (email);
+
+CREATE TABLE sessions(
+    session_id TEXT NOT NULL PRIMARY KEY,
+    user_id BIGINT NOT NULL REFERENCES users (id) ON DELETE CASCADE,
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(),
+    valid_until TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now()
+);
+
+CREATE TABLE robots(
+    robot_id BIGSERIAL NOT NULL PRIMARY KEY,
+    owner_user_id BIGINT NOT NULL REFERENCES users (id) ON DELETE CASCADE,
+    parent_robot_id BIGINT NOT NULL DEFAULT 0,
+    is_favourite BOOLEAN NOT NULL DEFAULT false,
+    is_active BOOLEAN NOT NULL DEFAULT false,
+    ticker TEXT NOT NULL DEFAULT '',
+    buy_price DOUBLE PRECISION NOT NULL DEFAULT 0,
+    sell_price DOUBLE PRECISION NOT NULL DEFAULT 0,
+    plan_start TIMESTAMP WITH TIME ZONE,
+    plan_end TIMESTAMP WITH TIME ZONE,
+    plan_yield DOUBLE PRECISION NOT NULL DEFAULT 0,
+    fact_yield DOUBLE PRECISION NOT NULL DEFAULT 0,
+    deals_count BIGINT NOT NULL DEFAULT 0,
+    activated_at TIMESTAMP WITH TIME ZONE,
+    deactivated_at TIMESTAMP WITH TIME ZONE,
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT now(),
+    deleted_at TIMESTAMP WITH TIME ZONE DEFAULT NULL,
+    is_buying BOOLEAN NOT NULL DEFAULT true
+);

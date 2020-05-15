@@ -1,0 +1,96 @@
+{{define "head"}}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        table {
+            font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+            font-size: 14px;
+            border-collapse: collapse;
+            text-align: center;
+        }
+        th, td:first-child {
+            background: #AFCDE7;
+            color: white;
+            padding: 10px 20px;
+        }
+        th, td {
+            border-style: solid;
+            border-width: 0 1px 1px 0;
+            border-color: white;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+        td {
+            background: #D8E6F3;
+        }
+        th:first-child, td:first-child {
+            text-align: left;
+        }
+        tr:hover td{
+            background: #9ecaf0;
+        }
+    </style>
+    <title>Список роботов пользователя</title>{{end}}
+{{define "body"}}
+    <div class="accordion" id="accordionExample">
+        <div class="card">
+        <div class="card-header" id="headingOne">
+            <h5 class="mb-0">
+            <button class="btn btn-link" type="button" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                Список роботов
+            </button>
+            </h5>
+        </div>
+    
+        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+            <div class="card-body">
+            <table>
+                <th>ID</th>
+                <th>В избранном</th>
+                <th>Активен</th>
+                <th>ID родительского робота</th>
+                <th>Тикер</th>
+                <th>Цена покупки</th>
+                <th>Цена продажи</th>
+                <th>Дата<br> запуска</th>
+                <th>Дата<br> остановки</th>
+                <th>Плановая <br> доходность</th>
+                <th>Фактическая<br> доходность</th>
+                <th>Кол-во совершенных<br> сделок</th>
+                <th>Дата<br> активации</th>
+                <th>Дата<br> деактивации</th>
+                <th>Дата<br> создания</th>
+                <tbody>
+                {{range $key, $value := . }}
+                <tr>
+                    <td>{{$value.RobotID}}</td>
+                    <td>{{$value.IsFavourite}}</td>
+                    <td>{{$value.IsActive}}</td>
+                    <td>{{$value.ParentRobotID}}</td>
+                    <td>{{$value.Ticker}}</td>
+                    <td>{{$value.BuyPrice}}</td>
+                    <td>{{$value.SellPrice}}</td>
+                    <td>{{ validTime $value.PlanStart}}</td>
+                    <td>{{ validTime $value.PlanEnd}}</td>
+                    <td>{{$value.PlanYield}}</td>
+                    <td>{{$value.FactYield}}</td>
+                    <td>{{$value.DealsCount}}</td>
+                    <td>{{ validTime $value.ActivatedAt}}</td>
+                    <td>{{ validTime $value.DeactivatedAt}}</td>
+                    <td>{{ validTime $value.CreatedAt}}</td>
+                </tr>
+                {{end}}
+
+                </tbody>
+                </table>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+{{end}}

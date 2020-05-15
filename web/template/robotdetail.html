@@ -1,0 +1,63 @@
+{{define "head"}}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+      .grid-block {
+          display: grid;
+          justify-items: center;    
+      }
+      .grid-block dl {
+          display: grid;
+          grid-template-columns: auto auto;
+      }
+      .grid-block dl dd {
+          text-align: right;
+      }
+    </style>
+    <title>Детали робота</title>
+{{end}}
+{{define "body"}}
+    
+    <div class="accordion" id="accordionExample">
+        <div class="card">
+          <div class="card-header" id="headingOne">
+            <h5 class="mb-0">
+              <button class="btn btn-link" type="button" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                Робот
+              </button>
+            </h5>
+          </div>
+      
+          <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+            <div class="card-body">
+              <div class="grid-block">
+                <dl>
+                  <dt>ID</dt><dd>{{ .RobotID }}</dd>
+                  <dt>В избранном</dt><dd>{{ .IsFavourite}}</dd>
+                  <dt>Активен</dt><dd>{{ .IsActive}}</dd>
+                  <dt>ID родительского робота</dt><dd>{{ .ParentRobotID}}</dd>
+                  <dt>Тикер</dt><dd>{{ .Ticker}}</dd>
+                  <dt>Цена покупки</dt><dd>{{ .BuyPrice}}</dd>
+                  <dt>Цена продажи</dt><dd>{{ .SellPrice}}</dd>
+                  <dt>Дата запуска</dt><dd>{{ validTime .PlanStart}}</dd>
+                  <dt>Дата остановки</dt><dd>{{ validTime .PlanEnd}}</dd>
+                  <dt>Плановая доходность</dt><dd>{{ .PlanYield}}</dd>
+                  <dt>Фактическая доходность</dt><dd>{{ .FactYield}}</dd>
+                  <dt>Кол-во совершенных сделок</dt><dd>{{ .DealsCount}}</dd>
+                  <dt>Дата активации</dt><dd>{{validTime .ActivatedAt}}</dd>
+                  <dt>Дата деактивации</dt><dd>{{ validTime .DeactivatedAt}}</dd>
+                  <dt>Дата создания</dt><dd>{{ validTime .CreatedAt}}</dd>
+                </dl>
+              </div>
+             
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+{{end}}
+</html>
